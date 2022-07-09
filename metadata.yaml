@@ -1,0 +1,5 @@
+homepage: "https://arkeero.com/"
+documentation: "https://www.arkeero.com/pixel"
+versions:
+  - sha: 2e43487698272f2d92c67ad8b17308bfd48b055b
+    changeNotes: Initial Version
