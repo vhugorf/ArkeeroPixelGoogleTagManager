@@ -339,14 +339,15 @@ ___TEMPLATE_PARAMETERS___
 
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
-const log             = require('logToConsole');
-const queryPermission = require('queryPermission');
-const sendPixel       = require('sendPixel');
-const setCookie       = require('setCookie');
-const getCookieValues = require('getCookieValues');
-const getUrl          = require('getUrl');
-const decode          = require('decodeUri');
-const encodeUri       = require('encodeUri');
+const log                = require('logToConsole');
+const queryPermission    = require('queryPermission');
+const sendPixel          = require('sendPixel');
+const setCookie          = require('setCookie');
+const getCookieValues    = require('getCookieValues');
+const getUrl             = require('getUrl');
+const decode             = require('decodeUri');
+const encodeUri          = require('encodeUri');
+const encodeUriComponent = require('encodeUriComponent');
 
 /*
  * Tipo de pixel Setup
@@ -385,17 +386,17 @@ if( ( data.PixelType === 'pageview') ){
     cookieValues = getCookieValues(cookieName);
   }
 
-  PixelType      = ( (typeof(data.PixelType)      !== "undefined") ? data.PixelType                         : "");
-  txt_Goal_ID    = ( (typeof(data.txt_Goal_ID)    !== "undefined") ? "goal_id=" + data.txt_Goal_ID          : "");
-  offer          = ( (typeof(data.offer)          !== "undefined") ? "&px=" + data.offer                    : "");
-  transactionID  = ( (data.transactionID          !== "")          ? join + "adv_sub=" + data.transactionID : join + "adv_sub=SUBID");
+  PixelType      = ( (typeof(data.PixelType)      !== "undefined") ? encodeUriComponent(data.PixelType)                         : "");
+  txt_Goal_ID    = ( (typeof(data.txt_Goal_ID)    !== "undefined") ? "goal_id=" + encodeUriComponent(data.txt_Goal_ID)          : "");
+  offer          = ( (typeof(data.offer)          !== "undefined") ? "&px=" + encodeUriComponent(data.offer)                    : "");
+  transactionID  = ( (data.transactionID          !== "")          ? join + "adv_sub=" + encodeUriComponent(data.transactionID) : join + "adv_sub=SUBID");
   arktrid        = "&trid=" + cookieValues;
-  revenue        = ( (typeof(data.txt_revenue)    !== "undefined") ? "&amount=" + data.txt_revenue          : "");
-  txt_customVar1 = ( (typeof(data.txt_customVar1) !== "undefined") ? "&sub_id1=" + data.txt_customVar1      : "");
-  txt_customVar2 = ( (typeof(data.txt_customVar2) !== "undefined") ? "&sub_id2=" + data.txt_customVar2      : "");
-  txt_customVar3 = ( (typeof(data.txt_customVar3) !== "undefined") ? "&sub_id3=" + data.txt_customVar3      : "");
-  txt_customVar4 = ( (typeof(data.txt_customVar4) !== "undefined") ? "&sub_id4=" + data.txt_customVar4      : "");
-  txt_customVar5 = ( (typeof(data.txt_customVar5) !== "undefined") ? "&sub_id5=" + data.txt_customVar5      : "");
+  revenue        = ( (typeof(data.txt_revenue)    !== "undefined") ? "&amount="  + encodeUriComponent(data.txt_revenue)         : "");
+  txt_customVar1 = ( (typeof(data.txt_customVar1) !== "undefined") ? "&sub_id1=" + encodeUriComponent(data.txt_customVar1)      : "");
+  txt_customVar2 = ( (typeof(data.txt_customVar2) !== "undefined") ? "&sub_id2=" + encodeUriComponent(data.txt_customVar2)      : "");
+  txt_customVar3 = ( (typeof(data.txt_customVar3) !== "undefined") ? "&sub_id3=" + encodeUriComponent(data.txt_customVar3)      : "");
+  txt_customVar4 = ( (typeof(data.txt_customVar4) !== "undefined") ? "&sub_id4=" + encodeUriComponent(data.txt_customVar4)      : "");
+  txt_customVar5 = ( (typeof(data.txt_customVar5) !== "undefined") ? "&sub_id5=" + encodeUriComponent(data.txt_customVar5)      : "");
   url            = encodeUri(urltransactionParams + PixelType + "?" + txt_Goal_ID + transactionID + arktrid + offer + revenue + txt_customVar1 + txt_customVar2 + txt_customVar3 + txt_customVar4 + txt_customVar5);
   log(url);
   getArk(url);
